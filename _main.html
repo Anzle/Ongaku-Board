@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Initialize all of the audio components-->
+<p id="demo">hi</p>
+<audio id="sound" src="audio/circle_of_life"></audio>
+
+	<table>
+		<tr><td>Circle of Life</td></tr>
+		<tr><td><a href="javascript:play_multi_sound('sound')"> image</a></td></tr>
+	</table>
+
+
+<!--This code brought to you by: http://www.storiesinflight.com/html5/audio.html 
+This code creates a 2D array that stores HTML5 audio objects and allows playing on multiple audio channels-->
+<script type="text/javascript">
+	var channel_max = 10;										// number of channels
+	audiochannels = new Array();
+	for (a=0;a<channel_max;a++) {							// prepare the channels
+		audiochannels[a] = new Array();
+		audiochannels[a]['channel'] = new Audio();		// create a new audio object
+		audiochannels[a]['finished'] = -1;					// expected end time for this channel
+	}
+	function play_multi_sound(s) {
+		for (a=0;a<audiochannels.length;a++) {
+			thistime = new Date();
+			if (audiochannels[a]['finished'] < thistime.getTime()) 
+			{				// is this channel finished?
+				audiochannels[a]['finished'] = thistime.getTime() + document.getElementById(s).duration*1000;
+				
+				audiochannels[a]['channel'].src = document.getElementById(s).src + get_source(document.getElementById(s));
+				audiochannels[a]['channel'].load();
+				audiochannels[a]['channel'].play();
+				break;
+			}
+		}
+	}
+	
+		<!-- This code brought to us by Rob W of StackOverflow (not me)
+		http://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser-->
+	var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+    // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
+	var isFirefox = typeof InstallTrigger !== 'undefined';   // Firefox 1.0+
+	var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+    // At least Safari 3+: "[object HTMLElementConstructor]"
+	var isChrome = !!window.chrome && !isOpera;              // Chrome 1+
+	var isIE = /*@cc_on!@*/false || !!document.documentMode; // At least IE6
+	 document.getElementById("demo").innerHTML = isIE;
+	function	get_source(s){
+		if(isChrome)	return ".wav";
+		else	return ".mp3";
+	}
+</script>
+</html>
