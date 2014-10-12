@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
-
-<!-- Initialize all of the audio components-->
-<p id="demo">hi</p>
+<title>HackRU Sound Board</title>
+<!-- Initialize all of the audio components
+Use the file name, but don't add the file extension. Must have two versions of file, _filename.mp3 and _filename.wav-->
 <audio id="sound" src="audio/circle_of_life"></audio>
 
-	<table>
+<h1> Adorable Sound Board Title </h1>
+
+	<table> <!-- Even Rows have titles, Odd Rows have sound clips-->
 		<tr><td>Circle of Life</td></tr>
-		<tr><td><a href="javascript:play_multi_sound('sound')"> image</a></td></tr>
+		<tr><td><a href="javascript:play_multi_sound('sound')"> <img src="img/poyo.png" /></a></td></tr>
 	</table>
 
 
@@ -45,9 +47,11 @@ This code creates a 2D array that stores HTML5 audio objects and allows playing 
     // At least Safari 3+: "[object HTMLElementConstructor]"
 	var isChrome = !!window.chrome && !isOpera;              // Chrome 1+
 	var isIE = /*@cc_on!@*/false || !!document.documentMode; // At least IE6
-	 document.getElementById("demo").innerHTML = isIE;
+	<!-- document.getElementById("demo").innerHTML = isIE; -->
+	
+	<!-- The code tests if the user is using Opera. If so, then return a wav else, mp3-->
 	function	get_source(s){
-		if(isChrome)	return ".wav";
+		if(isOpera)	return ".wav";
 		else	return ".mp3";
 	}
 </script>
