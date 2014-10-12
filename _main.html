@@ -15,8 +15,9 @@ Use the file name, but don't add the file extension. Must have two versions of f
 <audio id="R" src="audio/Rando"></audio>
 <audio id="S" src="audio/Smell"></audio>
 <audio id="H" src="audio/This Hobo"></audio>
+<audio id="WB" src="audio/Wrist Band"></audio>
 
-<h1> Adorable Sound Board Title </h1>
+<h1> <a href="javascript:play_multi_sound('WB')" style="text-decoration:none;color:black;">Adorable Sound Board Title </a></h1>
 
 	<table> <!-- Even Rows have titles, Odd Rows have sound clips-->
 		<tr><td>Bottled Water</td><td>But Really</td><td>Concentrate</td><td>Convert</td></tr>
@@ -61,7 +62,7 @@ This code creates a 2D array that stores HTML5 audio objects and allows playing 
 			thistime = new Date();
 			if (audiochannels[a]['finished'] < thistime.getTime()) 
 			{				// is this channel finished?
-				audiochannels[a]['finished'] = thistime.getTime() + document.getElementById(s).duration*1000;
+				audiochannels[a]['finished'] = thistime.getTime() + 10*1000;
 				
 				audiochannels[a]['channel'].src = document.getElementById(s).src + get_source(document.getElementById(s));
 				audiochannels[a]['channel'].load();
